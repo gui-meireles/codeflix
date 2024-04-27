@@ -4,7 +4,7 @@ import React from "react";
 export const CategoryEdit = () => (
     <Box>
         <Typography variant="h3" component="h1">
-            Home
+            Edit category
         </Typography>
     </Box>
 );
