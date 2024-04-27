@@ -1,3 +1,14 @@
+Para iniciar o projeto:
+
+Baixe o yarn ( Semelhante ao npm, porém tem melhor perfomance e otimização )
+
+Na raiz do projeto web-codeflix, abra um terminal e digite os comandos na sequencia:
+
+1 -> yarn install ( Instala as dependências do projeto )
+
+2 -> yarn start ( Inicia a aplicação web )
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
