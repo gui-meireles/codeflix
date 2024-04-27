@@ -3,7 +3,7 @@ import React from "react";
 import {useAppSelector} from "../../app/hooks";
 import {selectCategories} from "./categorySlice";
 import {Link} from "react-router-dom";
-import {DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, renderActionsCell} from '@mui/x-data-grid';
+import {DataGrid, GridColDef, GridRenderCellParams, GridRowsProp, GridToolbar} from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const CategoryList = () => {
@@ -81,9 +81,23 @@ export const CategoryList = () => {
             {/*    <Typography key={category.id}>{category.name}</Typography>*/}
             {/*))}*/}
 
-            {/*<div style={{ height: 300, width: '100%' }}>*/}
-                <DataGrid rows={rows} columns={columns} />
-            {/*</div>*/}
+            <div style={{ height: 300, width: '100%' }}>
+                <DataGrid
+                    disableColumnSelector={true}
+                    disableColumnFilter={true}
+                    disableDensitySelector={true}
+                    disableSelectionOnClick={true}
+                    rowsPerPageOptions={[5, 10, 15, 50, 100]}
+                    rows={rows} columns={columns}
+                    components={{ Toolbar: GridToolbar }}
+                    componentsProps={{
+                        toolbar: {
+                            showQuickFilter: true,
+                            quickFilterProps: { debounceMs: 500 }, // Auto search between 500ms
+                        },
+                    }}
+                />
+            </div>
         </Box>
     );
 };
