@@ -9,6 +9,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 export const CategoryList = () => {
     const categories = useAppSelector(selectCategories);
 
+    const componentProps = {
+        toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 500 }, // Auto search between 500ms
+        },
+    };
+
     // Use categores to create rows
     const rows: GridRowsProp = categories.map((category) => ({
         id: category.id,
@@ -22,7 +29,8 @@ export const CategoryList = () => {
         {
             field: 'name',
             headerName: 'Name',
-            flex: 1
+            flex: 1,
+            renderCell: renderNameCell
         },
         {
             field: 'isActive',
@@ -55,6 +63,17 @@ export const CategoryList = () => {
         )
     }
 
+    function renderNameCell(rowData: GridRenderCellParams) {
+        return (
+            <Link
+                style={{ textDecoration: "none" }}
+                to={`/categories/edit/${rowData.id}`}
+                >
+                <Typography color="primary">{ rowData.value }</Typography>
+            </Link>
+        );
+    }
+
     function renderIsActiveCell(rowData: GridRenderCellParams) {
         return (
             <Typography color={rowData.value ? "primary" : "secondary"}>
@@ -77,11 +96,7 @@ export const CategoryList = () => {
                 </Button>
             </Box>
 
-            {/*{categories.map((category) => (*/}
-            {/*    <Typography key={category.id}>{category.name}</Typography>*/}
-            {/*))}*/}
-
-            <div style={{ height: 300, width: '100%' }}>
+            <Box sx={{ height: 600, display: "flex" }}>
                 <DataGrid
                     disableColumnSelector={true}
                     disableColumnFilter={true}
@@ -90,14 +105,9 @@ export const CategoryList = () => {
                     rowsPerPageOptions={[5, 10, 15, 50, 100]}
                     rows={rows} columns={columns}
                     components={{ Toolbar: GridToolbar }}
-                    componentsProps={{
-                        toolbar: {
-                            showQuickFilter: true,
-                            quickFilterProps: { debounceMs: 500 }, // Auto search between 500ms
-                        },
-                    }}
+                    componentsProps={componentProps}
                 />
-            </div>
+            </Box>
         </Box>
     );
 };
